@@ -3,7 +3,7 @@ version: '1'
 workflowDefinition:
   tasks:
   - externalId: create_asset_hierarchy_task
-    type: transformation
+    type: 'transformation'
     parameters:
       transformation:
         externalId: create_asset_hierarchy
@@ -12,7 +12,7 @@ workflowDefinition:
     timeout: 1800
 
   - externalId: contextualize_ts_assets_task
-    type: transformation
+    type: 'transformation'
     parameters:
       transformation:
         externalId: contextualize_ts_assets
@@ -23,7 +23,7 @@ workflowDefinition:
       - externalId: create_asset_hierarchy_task
 
   - externalId: icapi_datapoints_extractor_task
-    type: function
+    type: 'function'
     parameters:
       function:
         externalId: icapi_datapoints_extractor
@@ -34,7 +34,7 @@ workflowDefinition:
       - externalId: contextualize_ts_assets_task
 
   - externalId: oee_timeseries_task
-    type: function
+    type: 'function'
     parameters:
       function:
         externalId: oee_timeseries
