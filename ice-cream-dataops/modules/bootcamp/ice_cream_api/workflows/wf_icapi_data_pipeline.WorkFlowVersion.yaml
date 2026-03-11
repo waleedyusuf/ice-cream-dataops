@@ -3,18 +3,18 @@ version: '1'
 workflowDefinition:
   tasks:
   - externalId: create_asset_hierarchy_task
-    type: function
+    type: transformation
     parameters:
-      function:
+      transformation:
         externalId: create_asset_hierarchy
         data: {}
     retries: 2
     timeout: 1800
 
   - externalId: contextualize_ts_assets_task
-    type: function
+    type: transformation
     parameters:
-      function:
+      transformation:
         externalId: contextualize_ts_assets
         data: {}
     retries: 2
