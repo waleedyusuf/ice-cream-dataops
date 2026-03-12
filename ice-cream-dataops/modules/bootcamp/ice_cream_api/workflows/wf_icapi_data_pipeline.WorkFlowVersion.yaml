@@ -7,37 +7,41 @@ workflowDefinition:
     parameters:
       transformation:
         externalId: create_asset_hierarchy
-    retries: 2
-    timeout: 1800
-
+        concurrencyPolicy: fail
+    retries: 3
+    timeout: 3600
+    onFailure: abortWorkflow
   - externalId: contextualize_ts_assets_task
     type: 'transformation'
     parameters:
       transformation:
         externalId: contextualize_ts_assets
-    retries: 2
-    timeout: 1800
+        concurrencyPolicy: fail
+    retries: 3
+    timeout: 3600
+    onFailure: abortWorkflow
     dependsOn:
       - externalId: create_asset_hierarchy_task
-
   - externalId: icapi_datapoints_extractor_task
-    type: 'function'
+    type: function
     parameters:
       function:
         externalId: icapi_datapoints_extractor
         data: { "hours": 1 }
     retries: 3
     timeout: 3600
+    onFailure: abortWorkflow
     dependsOn:
       - externalId: contextualize_ts_assets_task
 
   - externalId: oee_timeseries_task
-    type: 'function'
+    type: function
     parameters:
       function:
         externalId: oee_timeseries
-        data: {}
+        data: { "hours": 1 }
     retries: 3
     timeout: 3600
+    onFailure: abortWorkflow
     dependsOn:
       - externalId: icapi_datapoints_extractor_task

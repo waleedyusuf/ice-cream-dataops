@@ -10,4 +10,3 @@ select
   ) as parent
   from
   `ice-cream-factory-db`.`assets`
-  
